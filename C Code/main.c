@@ -65,6 +65,7 @@ int main(void)
 		}
 	}
 
+	//Function to put remote into sleep mode
 	void sleepytime()
 	{
 		EICRA = _BV(ISC01);
@@ -77,7 +78,7 @@ int main(void)
 		sleep_disable();
 	}
 	
-	//Encodes and sends IR
+	//Encodes and sends IR signal based on binary
 	void encode(unsigned long command)
 	{
 		//Leading pulse signal
@@ -107,7 +108,7 @@ int main(void)
 	while(1)
 	{    
 		//unsigned long y = PIND;
-		switch(PIND)
+		switch(PIND) //when certain button is pressed
 		{
 			case 0xFE:
 				if (x == 1)
@@ -143,7 +144,7 @@ int main(void)
 				incre++;
 				break;
 		}
-		if (incre >= 1000000)
+		if (incre >= 1000000) //lazy way to time sleep operation
 		{
 			sleepytime();
 			incre = 0;
